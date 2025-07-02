@@ -1,0 +1,38 @@
+###
+POST  http://localhost:5000/api/users/signup
+Content-Type: application/json
+
+{
+    "name": "Igor",
+    "email": "igorfon@gmail.com",
+    "password": "123456789"
+}
+
+###
+###
+POST  http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "igorfon@gmail.com",
+    "password": "123456789"
+}
+
+###
+###
+POST  http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+
+    "email": "Caio@gmail.com",
+    "password": "123456789"
+}
+
+###
+
+###
+GET http://localhost:5000/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjU1NDQ0NzIxYjYzZWI2ODFmYmQ2MiIsImlhdCI6MTc1MTQ3MTE3MiwiZXhwIjoxNzUyMDc1OTcyfQ.O8U9M0wJGpMpibjE5GvSd55D9soBhZLPGiaVo9LpJFI
+###

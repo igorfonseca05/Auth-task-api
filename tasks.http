@@ -1,0 +1,11 @@
+###
+
+POST http://localhost:5000/api/tasks
+Content-Type: application/json
+
+{
+    "description" : "To address code issue",
+    "isCompleted": false
+}
+
+###
