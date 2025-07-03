@@ -2,7 +2,10 @@ const TaskModel = require('../models/taskModel')
 
 exports.createTask = async (req, res) => {
     try {
-        const task = new TaskModel(req.body)
+        const task = new TaskModel({
+            ...req.body,
+            owner: req.user._id
+        })
         await task.save()
 
         res.status(200).json({ message: 'Task has been created' })
@@ -14,14 +17,24 @@ exports.createTask = async (req, res) => {
 
 exports.getAllTask = async (req, res) => {
     try {
+        const match = {}
 
-        const data = await TaskModel.find(req.params)
+        if (req.query.isCompleted) {
+            match.isCompleted = req.query.isCompleted === 'true'
+        }
+
+        await req.user.populate({
+            path: 'tasks',
+            match
+        })
+
+        // await data.populate('owner')
 
         if (!res) {
             throw new Error('No task has been found')
         }
 
-        res.status(200).json({ data })
+        res.status(200).json({ data: req.user.tasks })
 
     } catch (error) {
         console.log(error)
@@ -32,8 +45,10 @@ exports.getAllTask = async (req, res) => {
 
 exports.getTaskById = async (req, res) => {
     try {
-        const id = req.params.id
-        const doc = await TaskModel.findById(id)
+        const _id = req.params.id
+        const doc = await TaskModel.findOne({ _id, 'owner': req.user._id })
+
+        // await doc.populate('owner')
 
         if (!doc) {
             throw new Error('Document not found')
@@ -62,11 +77,10 @@ exports.updateTask = async (req, res) => {
 
     try {
 
-        const id = req.params.id
+        const _id = req.params.id
         const newData = req.body
 
-        // const doc2 = await TaskModel.findOneAndUpdate(id, newData, { new: true, runValidators: true })
-        const doc = await TaskModel.findById(id)
+        const doc = await TaskModel.findOne({ _id, 'owner': req.user._id })
 
         if (!doc) {
             throw new Error('it was not possible to find the document')
@@ -87,9 +101,9 @@ exports.updateTask = async (req, res) => {
 exports.deleteById = async (req, res) => {
     try {
 
-        const id = req.params.id
+        const _id = req.params.id
 
-        const doc = await TaskModel.findByIdAndDelete(id)
+        const doc = await TaskModel.findOneAndDelete({ _id, 'owner': req.user._id })
 
         if (!doc) throw new Error('Doc not found')
 

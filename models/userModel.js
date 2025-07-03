@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const argon2 = require('argon2')
 const validator = require('validator')
+const TaskModel = require('./taskModel')
 
 // const UserModel = require('../models/mo')
 
@@ -51,6 +52,14 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+userSchema.virtual('tasks', {
+    ref: 'task',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+
 
 // 4º step 
 // To clean up the userData before sending it back
@@ -123,6 +132,12 @@ userSchema.pre('save', async function (next) {
     }
 })
 
+// delete Task when remove user account
+userSchema.pre('findOneAndDelete', async function (next) {
+    const userId = this.getFilter()._id
+    await TaskModel.deleteMany({ owner: userId })
+    next()
+})
 
 const userModel = mongoose.model('userModel', userSchema)
 

@@ -9,3 +9,54 @@ Content-Type: application/json
 }
 
 ###
+###
+
+POST http://localhost:5000/api/tasks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjZiZmRkYmY2YWU3YmZjZmUxMzRiNCIsImlhdCI6MTc1MTU2NDI1MywiZXhwIjoxNzUyMTY5MDUzfQ.Y6ByAijbp5dbvpIBLemDhc_8BiRA4aIgGjhfbmn2bXQ
+
+{
+    "description" : "Tarefa 1 carmelio",
+    "isCompleted": true
+}
+
+###
+
+###
+// igor user
+GET http://localhost:5000/api/tasks/686688a3551265b890c5d28a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjU4OGVlYmY4NzhmYTMzNTFmMmE3NiIsImlhdCI6MTc1MTQ4NDY1NCwiZXhwIjoxNzUyMDg5NDU0fQ.PanXxcUpDZyspaPHXemSCZDtlO0rZubyxRW3E05C_Ow
+###
+
+###
+// carmelio user
+GET http://localhost:5000/api/tasks/686688a3551265b890c5d28a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjY4N2VlMGMxY2MwOTBmNDE3ZWZkNSIsImlhdCI6MTc1MTU0OTkzNCwiZXhwIjoxNzUyMTU0NzM0fQ.v92Lg-ur9JjhqBJ0TeGOTe2m84Fqm4JnljebOTVXUiI
+###
+
+###
+// carmelio get all tasks
+GET http://localhost:5000/api/tasks?isCompleted=true
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjZiZmRkYmY2YWU3YmZjZmUxMzRiNCIsImlhdCI6MTc1MTU2NDI1MywiZXhwIjoxNzUyMTY5MDUzfQ.Y6ByAijbp5dbvpIBLemDhc_8BiRA4aIgGjhfbmn2bXQ
+###
+
+###
+// carmelio update all tasks
+PATCH  http://localhost:5000/api/tasks/686688a3551265b890c5d28a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjZiZmRkYmY2YWU3YmZjZmUxMzRiNCIsImlhdCI6MTc1MTU2NDI1MywiZXhwIjoxNzUyMTY5MDUzfQ.Y6ByAijbp5dbvpIBLemDhc_8BiRA4aIgGjhfbmn2bXQ
+
+{
+    "description" : "Tarefa 1 do carmelio",
+    "isCompleted": true
+}
+###
+###
+// carmelio update all tasks
+DELETE  http://localhost:5000/api/tasks/686688a3551265b890c5d28a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NjY4N2VlMGMxY2MwOTBmNDE3ZWZkNSIsImlhdCI6MTc1MTU0OTkzNCwiZXhwIjoxNzUyMTU0NzM0fQ.v92Lg-ur9JjhqBJ0TeGOTe2m84Fqm4JnljebOTVXUiI
+###

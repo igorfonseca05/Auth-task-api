@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const userModel = require('./userModel')
 
 const taskSchema = new mongoose.Schema({
     description: {
@@ -15,11 +16,14 @@ const taskSchema = new mongoose.Schema({
     isCompleted: {
         type: Boolean,
         required: true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'userModel' // Usamos o mesmo nome da coleção que queremos relacionar
     }
-    // owner: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true
-    // }
+}, {
+    timestamps: true
 })
 
 const TaskModel = mongoose.model('task', taskSchema)
